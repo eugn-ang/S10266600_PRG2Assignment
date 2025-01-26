@@ -2,6 +2,15 @@
 using System.Globalization;
 
 
+//==========================================================
+// Student Number	: S10266600
+// Student Name	: Ang Yu Heng Eugene
+// Partner Name	: Lim Tzer Ee Joshua
+//==========================================================
+
+
+
+
 // test
 // Create an instance of the Terminal class
 Terminal terminal = new Terminal("Terminal 5");

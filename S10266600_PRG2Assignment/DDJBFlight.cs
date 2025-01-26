@@ -4,6 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//==========================================================
+// Student Number	: S10266600
+// Student Name	: Ang Yu Heng Eugene
+// Partner Name	: Lim Tzer Ee Joshua
+//==========================================================
+
+
+
 namespace S10266600_PRG2Assignment
 {
     class DDJBFlight : Flight

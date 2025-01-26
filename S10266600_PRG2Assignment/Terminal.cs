@@ -5,6 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
+
+//==========================================================
+// Student Number	: S10266600
+// Student Name	: Ang Yu Heng Eugene
+// Partner Name	: Lim Tzer Ee Joshua
+//==========================================================
+
+
 namespace S10266600_PRG2Assignment
 {
     class Terminal
