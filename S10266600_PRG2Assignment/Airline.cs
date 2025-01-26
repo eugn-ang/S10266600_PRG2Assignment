@@ -25,7 +25,13 @@ namespace S10266600_PRG2Assignment
         // methods
         public bool AddFlight(Flight flight)
         {
+            if (flight == null || Flights.ContainsKey(flight.FlightNumber))
+            {
+                return false;
+            }
 
+            Flights.Add(flight.FlightNumber, flight);
+            return true;
         }
         public double CalculateFees()
         {

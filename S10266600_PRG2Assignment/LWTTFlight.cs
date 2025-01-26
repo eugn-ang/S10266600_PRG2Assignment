@@ -20,7 +20,8 @@ namespace S10266600_PRG2Assignment
         //methods
         public override double CalcuateFees()
         {
-
+            double baseFee = 300; 
+            return baseFee + RequestFee; 
         }
 
         public override string ToString()

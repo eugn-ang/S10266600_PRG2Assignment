@@ -29,7 +29,26 @@ namespace S10266600_PRG2Assignment
         // methods
         public double calculateFees()
         {
+            double totalFees = 300; // Base Boarding Gate fee
 
+            // Additional fees based on the special request code
+            if (Flight != null)
+            {
+                switch (Flight)
+                {
+                    case CFFTFlight:
+                        totalFees += 150; // CFFT fee
+                        break;
+                    case DDJBFlight:
+                        totalFees += 300; // DDJB fee
+                        break;
+                    case LWTTFlight:
+                        totalFees += 500; // LWTT fee
+                        break;
+                }
+            }
+
+            return totalFees;
         }
         public override string ToString()
         {
