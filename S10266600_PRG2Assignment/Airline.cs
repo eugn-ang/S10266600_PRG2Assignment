@@ -35,11 +35,46 @@ namespace S10266600_PRG2Assignment
         }
         public double CalculateFees()
         {
+            double totalFees = 0;
 
+            foreach (var flight in Flights.Values)
+            {
+                if (flight.Origin == "SIN") 
+                {
+                    totalFees += 800;
+                }
+                else if (flight.Destination == "SIN") 
+                {
+                    totalFees += 500;
+                }
+
+                
+                if (flight is CFFTFlight cfftFlight)
+                {
+                    totalFees += 150;
+                }
+                else if (flight is DDJBFlight ddjbFlight)
+                {
+                    totalFees += 300; 
+                }
+                else if (flight is LWTTFlight lwttFlight)
+                {
+                    totalFees += 500; 
+                }
+
+                totalFees += 300;
+                return totalFees;
+            }
         }
         public bool RemoveFlight(Flight flight)
         {
+            if (flight == null || !Flights.ContainsKey(flight.FlightNumber))
+            {
+                return false;
+            }
 
+            Flights.Remove(flight.FlightNumber);
+            return true;
         }
         public override string ToString()
         {
