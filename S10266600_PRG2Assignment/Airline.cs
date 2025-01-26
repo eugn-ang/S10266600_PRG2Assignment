@@ -63,8 +63,9 @@ namespace S10266600_PRG2Assignment
                 }
 
                 totalFees += 300;
-                return totalFees;
+                
             }
+            return totalFees;
         }
         public bool RemoveFlight(Flight flight)
         {
