@@ -24,6 +24,85 @@ namespace S10266600_PRG2Assignment
             BoardingGates = new Dictionary<string,BoardingGate>();
             GateFees = new Dictionary<string,double>();
         }
+
+        // Method to load airlines from a CSV file
+        public void LoadAirlines()
+        {
+            try
+            {
+                using (StreamReader reader = new StreamReader("airlines.csv"))
+                {
+                    // read header
+                    reader.ReadLine();
+
+                    Console.WriteLine("Loading airlines...");
+                    while (!reader.EndOfStream)
+                    {
+                        var line = reader.ReadLine();
+                        var values = line.Split(',');
+
+                        
+                        if (values.Length == 2)
+                        {
+                            var name = values[0].Trim();
+                            var code = values[1].Trim();
+
+                            if (!Airlines.ContainsKey(code))
+                            {
+                                Airlines.Add(code, new Airline(name, code, Flights));
+                            }
+                        }
+                    }
+                    Console.WriteLine("Airlines loaded successfully.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading airlines: {ex.Message}");
+            }
+        }
+
+        // method to load boarding gates from csv file
+        // Method to load boarding gates from a CSV file
+        public void LoadBoardingGates()
+        {
+            try
+            {
+                using (StreamReader reader = new StreamReader("boardinggates.csv"))
+                {
+                    // read header
+                    reader.ReadLine();
+                    Console.WriteLine("Loading boarding gates...");
+                    while (!reader.EndOfStream)
+                    {
+                      
+
+                        var line = reader.ReadLine();
+                        var values = line.Split(',');
+
+                        // Assuming the CSV format is: GateName,SupportsCFFT,SupportsDDJB,SupportsLWTT
+                        if (values.Length == 4)
+                        {
+                            var gateName = values[0].Trim();
+                            var supportsCFFT = bool.Parse(values[1].Trim());
+                            var supportsDDJB = bool.Parse(values[2].Trim());
+                            var supportsLWTT = bool.Parse(values[3].Trim());
+
+                            if (!BoardingGates.ContainsKey(gateName))
+                            {
+                                BoardingGates.Add(gateName, new BoardingGate(gateName, supportsCFFT, supportsDDJB, supportsLWTT, null));
+                            }
+                        }
+                    }
+                    Console.WriteLine("Boarding gates loaded successfully.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading boarding gates: {ex.Message}");
+            }
+        }
+
         // methods
         // Add an airline to the terminal
         public bool AddAirlines(Airline airline)
@@ -92,10 +171,10 @@ namespace S10266600_PRG2Assignment
             }
 
             // Add gate fees if a boarding gate is assigned
-            if (BoardingGates.TryGetValue(flight.BoardingGate, out BoardingGate gate))
-            {
-                fees += gate.calculateFees();
-            }
+            //if (BoardingGates.TryGetValue(flight.BoardingGate, out BoardingGate gate))
+            //{
+            //    fees += gate.calculateFees();
+            //}
 
             return fees;
         }

@@ -79,7 +79,7 @@ namespace S10266600_PRG2Assignment
         }
         public override string ToString()
         {
-            return "Name: " + Name + "\tCode: " + Code + "\tFlights: " + Flights;
+            return "Name: " + Name; //+ "\tCode: " + Code + "\tFlights: " + Flights;
         }
     }
 }

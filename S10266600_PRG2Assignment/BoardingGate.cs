@@ -53,8 +53,8 @@ namespace S10266600_PRG2Assignment
         public override string ToString()
         {
             return "Gate Name: " + GateName + "\tSupports CFFT: " + SupportsCFFT
-                + "\tSupports DDJB: " + SupportsDDJB + "\tSupports LWTT: " + SupportsLWTT
-                + "Flight: " + Flight;
+                + "\tSupports DDJB: " + SupportsDDJB + "\tSupports LWTT: " + SupportsLWTT;
+                //+ "Flight: " + Flight;
         }
     }
 }
