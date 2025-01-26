@@ -1,0 +1,38 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace S10266600_PRG2Assignment
+{
+    abstract class Flight
+    {
+        // attributes
+        public string FlightNumber { get; set; }
+        public string Origin { get; set; }
+        public string Destination { get; set; }
+
+        public DateTime ExpectedTime { get; set; }
+        public string Status { get; set; }
+
+        // ctor
+        public Flight(string fn,string ori,string dest,DateTime et,string sta)
+        {
+            FlightNumber = fn;
+            Origin = ori;
+            Destination = dest;
+            ExpectedTime = et;
+            Status = sta;
+        }
+
+        // methods
+        public abstract double CalcuateFees();
+        public override string ToString()
+        {
+            return "Flight Number: " + FlightNumber + "\tOrigin: " + Origin 
+                + "\tDestination: " + Destination + "\tExpected Time: " + ExpectedTime
+                + "\tStatus: " + Status;
+        }
+    }
+}
