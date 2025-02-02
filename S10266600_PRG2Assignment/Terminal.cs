@@ -92,13 +92,13 @@ namespace S10266600_PRG2Assignment
                         if (values.Length == 4)
                         {
                             var gateName = values[0].Trim();
-                            var supportsCFFT = bool.Parse(values[1].Trim());
-                            var supportsDDJB = bool.Parse(values[2].Trim());
+                            var supportsDDJB = bool.Parse(values[1].Trim());
+                            var supportsCFFT = bool.Parse(values[2].Trim());
                             var supportsLWTT = bool.Parse(values[3].Trim());
 
                             if (!BoardingGates.ContainsKey(gateName))
                             {
-                                BoardingGates.Add(gateName, new BoardingGate(gateName, supportsCFFT, supportsDDJB, supportsLWTT, null));
+                                BoardingGates.Add(gateName, new BoardingGate(gateName, supportsDDJB, supportsCFFT, supportsLWTT, null));
                             }
                         }
                     }

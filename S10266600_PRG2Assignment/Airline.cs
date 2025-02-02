@@ -43,36 +43,51 @@ namespace S10266600_PRG2Assignment
         public double CalculateFees()
         {
             double totalFees = 0;
+            double totalDiscounts = 0;
+            int flightCount = Flights.Count;
 
             foreach (var flight in Flights.Values)
             {
-                if (flight.Origin == "SIN") 
-                {
-                    totalFees += 800;
-                }
-                else if (flight.Destination == "SIN") 
-                {
-                    totalFees += 500;
-                }
+                // Base Fees
+                double flightFee = 300; // Boarding Gate Base Fee
+                if (flight.Origin == "SIN")
+                    flightFee += 800;
+                else if (flight.Destination == "SIN")
+                    flightFee += 500;
+
+                // Special Request Code Fees
+                if (flight is CFFTFlight) flightFee += 150;
+                else if (flight is DDJBFlight) flightFee += 300;
+                else if (flight is LWTTFlight) flightFee += 500;
+                else totalDiscounts += 50; // No Special Request Code Discount
+
+                // Apply Discounts
+                if (flight.ExpectedTime.Hour < 11 || flight.ExpectedTime.Hour >= 21)
+                    totalDiscounts += 110; // Time-based discount
+
+                if (flight.Origin == "DXB" || flight.Origin == "BKK" || flight.Origin == "NRT")
+                    totalDiscounts += 25; // Origin-based discount
 
                 
-                if (flight is CFFTFlight cfftFlight)
-                {
-                    totalFees += 150;
-                }
-                else if (flight is DDJBFlight ddjbFlight)
-                {
-                    totalFees += 300; 
-                }
-                else if (flight is LWTTFlight lwttFlight)
-                {
-                    totalFees += 500; 
-                }
 
-                totalFees += 300;
-                
+                totalFees += flightFee;
             }
-            return totalFees;
+
+            // Apply Bulk Discounts
+            totalDiscounts += (flightCount / 3) * 350; // $350 discount per 3 flights
+
+            if (flightCount > 5)
+                totalDiscounts += totalFees * 0.03; // 3% discount on total bill
+
+            // Final Fee Calculation
+            double finalTotal = totalFees - totalDiscounts;
+
+            // Display Breakdown
+            Console.WriteLine($"Total Fees before Discount: ${totalFees}");
+            Console.WriteLine($"Total Discounts Applied: -${totalDiscounts}");
+            Console.WriteLine($"Final Total Fee: ${finalTotal}");
+
+            return finalTotal;
         }
         public bool RemoveFlight(Flight flight)
         {

@@ -14,8 +14,14 @@ using System.Threading.Tasks;
 
 namespace S10266600_PRG2Assignment
 {
-    abstract class Flight
+    abstract class Flight : IComparable<Flight>
     {
+        public int CompareTo(Flight other)
+        {
+            if (other == null) return 1;
+            return this.ExpectedTime.CompareTo(other.ExpectedTime);
+        }
+
         // attributes
         public string FlightNumber { get; set; }
         public string Origin { get; set; }

@@ -17,13 +17,13 @@ namespace S10266600_PRG2Assignment
     {
         // attributes
         public string GateName { get; set; }
-        public bool SupportsCFFT { get; set; }
         public bool SupportsDDJB { get; set; }
+        public bool SupportsCFFT { get; set; }
         public bool SupportsLWTT { get; set; }
         public Flight Flight { get; set; }
 
         // ctor
-        public BoardingGate(string gn, bool sCFFT, bool sDDJB,bool sLWTT,Flight fl)
+        public BoardingGate(string gn, bool sDDJB ,bool sCFFT,bool sLWTT,Flight fl)
         {
             GateName = gn;
             SupportsCFFT = sCFFT;
