@@ -494,7 +494,7 @@ while (true)
             string action = Console.ReadLine();
             if (action == "1" && chosenFlight != null) // Modify Flight
             {
-                ModifyExistingFlight(selectedAirline,chosenFlight);
+                ModifyExistingFlight(selectedAirline,chosenFlight,terminal);
             }
             else if (action == "2" && chosenFlight != null) // Delete Flight
             {
@@ -513,7 +513,7 @@ while (true)
 
         
 
-        void ModifyExistingFlight(Airline airline,string flight)
+        void ModifyExistingFlight(Airline airline,string flight,Terminal terminal)
         {
             airline.Flights.TryGetValue(flight, out var data);
 
@@ -564,27 +564,27 @@ while (true)
             Console.WriteLine($"Status: {data.Status}");
 
 
+            airline.Flights.TryGetValue(flight, out var chosenFlight);
+            
+                // Check if Special Request Code exists based on the subclass of the flight
+                if (chosenFlight is CFFTFlight)
+                {
+                    Console.WriteLine($"Special Request Code: CFFT");
+                }
+                else if (chosenFlight is DDJBFlight)
+                {
+                    Console.WriteLine($"Special Request Code: DDJB");
+                }
+                else if (chosenFlight is LWTTFlight)
+                {
+                    Console.WriteLine($"Special Request Code: LWTT");
+                }
+                else
+                {
+                    Console.WriteLine("Special Request Code: None");
+                }
 
-            // Check if Special Request Code exists
-            if (flight is CFFTFlight)
-            {
-                Console.WriteLine($"Special Request Code: CFFT");
-            }
-            else if (flight is DDJBFlight)
-            {
-                Console.WriteLine($"Special Request Code: DDJB");
-            }
-            else if (flight is LWTTFlight)
-            {
-                Console.WriteLine($"Special Request Code: LWTT");
-            }
-            else
-            {
-                Console.WriteLine("Special Request Code: None");
-            }
-
-
-            bool found = false;
+                bool found = false;
             // Check if Boarding Gate exists
             foreach (var gate in terminal.BoardingGates.Values)
             {
