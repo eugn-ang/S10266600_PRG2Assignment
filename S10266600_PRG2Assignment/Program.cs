@@ -110,6 +110,10 @@ while (true)
     {
         CreateNewFlight(terminal, flightsFilePath);
     }
+    else if (choice == "5")
+    {
+        DisplayAirlineFlights(terminal);
+    }
     else
     {
         Console.WriteLine("Invalid option. Please try again.");
@@ -128,24 +132,14 @@ while (true)
         // Prompt for flight number
         Console.Write("Enter Flight Number: ");
         string flightNumber = Console.ReadLine().Trim();
+        
+        // Prompt for boarding gate
+        Console.Write("Enter Boarding Gate Name: ");
+        string gateName = Console.ReadLine().Trim();
 
         // Check if the flight exists
         if (terminal.Flights.TryGetValue(flightNumber, out var flight))
         {
-            // Display flight details
-            Console.WriteLine("\nFlight Details:");
-            Console.WriteLine("-------------------------------------------------------------");
-            Console.WriteLine($"Flight Number: {flight.FlightNumber}");
-            Console.WriteLine($"Origin: {flight.Origin}");
-            Console.WriteLine($"Destination: {flight.Destination}");
-            Console.WriteLine($"Expected Time: {flight.ExpectedTime:dd/M/yyyy hh:mm:ss tt}");
-            Console.WriteLine($"Special Request Code: {(flight is CFFTFlight ? "CFFT" : flight is DDJBFlight ? "DDJB" : flight is LWTTFlight ? "LWTT" : "None")}");
-            Console.WriteLine("-------------------------------------------------------------");
-
-            // Prompt for boarding gate
-            Console.Write("Enter Boarding Gate Name: ");
-            string gateName = Console.ReadLine().Trim();
-
             // Check if the boarding gate exists
             if (terminal.BoardingGates.TryGetValue(gateName, out var gate))
             {
@@ -262,7 +256,7 @@ while (true)
             while (true)
             {
                 Console.Write("Enter Expected Departure/Arrival Time (dd/MM/yyyy HH:mm): ");
-                string timeInput = Console.ReadLine().Trim();
+                string timeInput = Console.ReadLine();
 
                 // Try to parse the input using the specified format
                 if (DateTime.TryParseExact(timeInput, "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out expectedTime))
@@ -309,7 +303,7 @@ while (true)
             // Append the flight to the CSV file
             try
             {
-                using (StreamWriter writer = new StreamWriter(filePath, true))
+                using (StreamWriter writer = new StreamWriter("flights.csv", true))
                 {
                     writer.WriteLine($"{flightNumber},{origin},{destination},{expectedTime:dd/MM/yyyy HH:mm},{specialRequestCode}");
                 }
@@ -355,10 +349,9 @@ while (true)
             // Print flight details in aligned format
             Console.WriteLine("{0,-12} {1,-20} {2,-20} {3,-20} {4,-10}",
                 flight.FlightNumber, airlineName, flight.Origin, flight.Destination,
-                flight.ExpectedTime.ToString("dd/M/yyyy")); // Format date as in image
+                flight.ExpectedTime.ToString("dd/M/yyyy h:mm:ss tt")); // Format date as in image
 
-            // Print departure/arrival time below flight number
-            Console.WriteLine("{0,-12}", flight.ExpectedTime.ToString("h:mm:ss tt"));
+           
         }
 
     }
@@ -391,7 +384,53 @@ while (true)
         
     }
 
+    void DisplayAirlineFlights(Terminal terminal)
+    {
+        // List all airlines
+        Console.WriteLine("\n======================================");
+        Console.WriteLine("List of Airlines for Changi Airport Terminal 5");
+        Console.WriteLine("======================================");
+        Console.WriteLine("{0,-10} {1,-20}", "Airline Code", "Airline Name");
 
+        foreach (var airline in terminal.Airlines)
+        {
+            Console.WriteLine("{0,-12} {1,-20}", airline.Key, airline.Value.Name);
+        }
+
+        // Prompt user for airline code
+        Console.Write("\nEnter Airline Code: ");
+        string airlineCode = Console.ReadLine().ToUpper();
+        if (terminal.Airlines.ContainsKey(airlineCode))
+        {
+            Airline selectedAirline = terminal.Airlines[airlineCode];   
+
+            // Display flights for selected airline
+            Console.WriteLine("\n======================================");
+            Console.WriteLine($"List of Flights for {selectedAirline.Name}");
+            Console.WriteLine("======================================");
+            Console.WriteLine("{0,-12} {1,-20} {2,-20} {3,-20} {4,-10}", "Flight Number", "Airline Name", "Origin", "Destination", "Expected");
+            Console.WriteLine("Departure/Arrival Time");
+
+            foreach (var flight in selectedAirline.Flights.Values)
+            {
+                string airlinePrefix = flight.FlightNumber.Substring(0, 2).Trim(); // Extract airline code
+                if(airlinePrefix == airlineCode)
+                {
+                    Console.WriteLine("{0,-13} {1,-20} {2,-20} {3,-20} {4,-10}",
+                    flight.FlightNumber, selectedAirline.Name, flight.Origin, flight.Destination, flight.ExpectedTime);
+
+                }
+                
+
+
+            }
+        }
+        else
+        {
+            Console.WriteLine("Invalid airline code.");
+        }
+
+    }
 
 
 }
