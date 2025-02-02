@@ -18,15 +18,15 @@ namespace S10266600_PRG2Assignment
         // attributes
         public string Name { get; set; }
         public string Code { get; set; }
-        public Dictionary<string,Flight> Flights { get; set; }
+        public Dictionary<string, Flight> Flights { get; set; }
 
         // ctor
-        public Airline(string na, string cd, Dictionary<string,Flight> dict)
+        public Airline(string na, string cd, Dictionary<string, Flight> dict)
         {
             Name = na;
             Code = cd;
             Flights = dict;
-            
+
         }
 
         // methods
@@ -68,7 +68,7 @@ namespace S10266600_PRG2Assignment
                 if (flight.Origin == "DXB" || flight.Origin == "BKK" || flight.Origin == "NRT")
                     totalDiscounts += 25; // Origin-based discount
 
-                
+
 
                 totalFees += flightFee;
             }

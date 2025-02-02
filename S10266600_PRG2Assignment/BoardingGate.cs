@@ -23,7 +23,7 @@ namespace S10266600_PRG2Assignment
         public Flight Flight { get; set; }
 
         // ctor
-        public BoardingGate(string gn, bool sDDJB ,bool sCFFT,bool sLWTT,Flight fl)
+        public BoardingGate(string gn, bool sDDJB, bool sCFFT, bool sLWTT, Flight fl)
         {
             GateName = gn;
             SupportsCFFT = sCFFT;
@@ -31,7 +31,7 @@ namespace S10266600_PRG2Assignment
             SupportsLWTT = sLWTT;
             Flight = fl;
 
-            
+
         }
         // methods
         public double calculateFees()
@@ -61,7 +61,7 @@ namespace S10266600_PRG2Assignment
         {
             return "Gate Name: " + GateName + "\tSupports CFFT: " + SupportsCFFT
                 + "\tSupports DDJB: " + SupportsDDJB + "\tSupports LWTT: " + SupportsLWTT;
-                //+ "Flight: " + Flight;
+            //+ "Flight: " + Flight;
         }
     }
 }

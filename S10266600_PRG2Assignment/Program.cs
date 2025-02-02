@@ -53,7 +53,7 @@ foreach (var line in File.ReadLines(flightsFilePath))
             flight = new CFFTFlight(flightNumber, origin, destination, expectedTime, "On Time", 150);
             break;
         case "DDJB":
-            flight = new DDJBFlight(flightNumber, origin, destination, expectedTime, "On Time",  300);
+            flight = new DDJBFlight(flightNumber, origin, destination, expectedTime, "On Time", 300);
             break;
         case "LWTT":
             flight = new LWTTFlight(flightNumber, origin, destination, expectedTime, "On Time", 500);
@@ -901,7 +901,7 @@ while (true)
                 }
 
                 // Compute fees using the flight's specific CalculateFees() method
-                
+
                 airlineSubtotal += flightFee;
 
                 // Apply promotional discounts if applicable

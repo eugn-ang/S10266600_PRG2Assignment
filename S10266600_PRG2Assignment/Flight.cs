@@ -29,25 +29,25 @@ namespace S10266600_PRG2Assignment
 
         public DateTime ExpectedTime { get; set; }
         public string Status { get; set; }
-       
-       
+
+
 
         // ctor
-        public Flight(string fn,string ori,string dest,DateTime et,string sta)
+        public Flight(string fn, string ori, string dest, DateTime et, string sta)
         {
             FlightNumber = fn;
             Origin = ori;
             Destination = dest;
             ExpectedTime = et;
             Status = sta;
-            
+
         }
 
         // methods
         public abstract double CalcuateFees();
         public override string ToString()
         {
-            return "Flight Number: " + FlightNumber + "\tOrigin: " + Origin 
+            return "Flight Number: " + FlightNumber + "\tOrigin: " + Origin
                 + "\tDestination: " + Destination + "\tExpected Time: " + ExpectedTime
                 + "\tStatus: " + Status;
         }

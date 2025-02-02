@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,18 +21,18 @@ namespace S10266600_PRG2Assignment
     {
         // attributes
         public string TerminalName { get; set; }
-        public Dictionary<string,Airline> Airlines { get; set; }
-        public Dictionary<string,Flight> Flights { get; set; }
-        public Dictionary<string,BoardingGate> BoardingGates { get; set; }
-        public Dictionary<string,double> GateFees { get; set; }
+        public Dictionary<string, Airline> Airlines { get; set; }
+        public Dictionary<string, Flight> Flights { get; set; }
+        public Dictionary<string, BoardingGate> BoardingGates { get; set; }
+        public Dictionary<string, double> GateFees { get; set; }
         // ctor
         public Terminal(string terminalname)
         {
             TerminalName = terminalname;
-            Airlines = new Dictionary<string,Airline>();
-            Flights = new Dictionary<string,Flight>();
-            BoardingGates = new Dictionary<string,BoardingGate>();
-            GateFees = new Dictionary<string,double>();
+            Airlines = new Dictionary<string, Airline>();
+            Flights = new Dictionary<string, Flight>();
+            BoardingGates = new Dictionary<string, BoardingGate>();
+            GateFees = new Dictionary<string, double>();
         }
 
         // Method to load airlines from a CSV file
@@ -49,7 +51,7 @@ namespace S10266600_PRG2Assignment
                         var line = reader.ReadLine();
                         var values = line.Split(',');
 
-                        
+
                         if (values.Length == 2)
                         {
                             var name = values[0].Trim();
@@ -83,7 +85,7 @@ namespace S10266600_PRG2Assignment
                     Console.WriteLine("Loading boarding gates...");
                     while (!reader.EndOfStream)
                     {
-                      
+
 
                         var line = reader.ReadLine();
                         var values = line.Split(',');
