@@ -121,6 +121,10 @@ while (true)
     {
         ModifyFlightDetails(terminal);
     }
+    else if (choice == "7")
+    {
+        DisplayScheduledFlights(terminal);
+    }
     else if (choice == "0")
     {
         Console.WriteLine("Exiting program. Goodbye!");
@@ -374,7 +378,7 @@ while (true)
     // Method to display all boarding gates
     void DisplayBoardingGates(Terminal terminal)
     {
-  
+
         Console.WriteLine("===============================================");
         Console.WriteLine(" List of Boarding Gates for Changi Airport Terminal 5");
         Console.WriteLine("===============================================\n");
@@ -396,8 +400,56 @@ while (true)
                 );
         }
 
-        
+
     }
+
+    void DisplayScheduledFlights(Terminal terminal)
+    {
+        Console.WriteLine("===============================================");
+        Console.WriteLine(" Flight Schedule for Changi Airport Terminal 5");
+        Console.WriteLine("===============================================\n");
+
+        // Sort flights by ExpectedTime
+        var sortedFlights = terminal.Flights.Values.OrderBy(flight => flight.ExpectedTime).ToList();
+
+        // Print column headers with proper alignment
+        Console.WriteLine("{0,-12} {1,-20} {2,-25} {3,-25} {4,-30} {5,-15} {6,-15}",
+            "Flight No", "Airline Name", "Origin", "Destination", "Expected Departure/Arrival Time", "Status", "Boarding Gate");
+
+        // Print a separator line
+        Console.WriteLine(new string('-', 150));
+
+        foreach (var flight in sortedFlights)
+        {
+            // Retrieve the airline name using the flight number prefix
+            string airlinePrefix = flight.FlightNumber.Substring(0, 2).Trim();
+            string airlineName = terminal.Airlines.TryGetValue(airlinePrefix, out var airline)
+                ? airline.Name
+                : "Unknown Airline";
+
+            // Check if the flight has a boarding gate assigned
+            string boardingGate = "Unassigned";
+            foreach (var gate in terminal.BoardingGates.Values)
+            {
+                if (gate.Flight != null && gate.Flight.FlightNumber == flight.FlightNumber)
+                {
+                    boardingGate = gate.GateName;
+                    break;
+                }
+            }
+
+            // Print flight details in aligned format
+            Console.WriteLine("{0,-12} {1,-20} {2,-25} {3,-25} {4,-30} {5,-15} {6,-15}",
+                flight.FlightNumber,
+                airlineName,
+                flight.Origin,
+                flight.Destination,
+                flight.ExpectedTime.ToString("dd/MM/yyyy h:mm tt"),
+                flight.Status,
+                boardingGate);
+        }
+    }
+
 
     void DisplayAirlineFlights(Terminal terminal)
     {
