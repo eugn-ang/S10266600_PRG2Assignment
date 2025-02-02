@@ -23,6 +23,8 @@ namespace S10266600_PRG2Assignment
 
         public DateTime ExpectedTime { get; set; }
         public string Status { get; set; }
+       
+       
 
         // ctor
         public Flight(string fn,string ori,string dest,DateTime et,string sta)
@@ -32,6 +34,7 @@ namespace S10266600_PRG2Assignment
             Destination = dest;
             ExpectedTime = et;
             Status = sta;
+            
         }
 
         // methods

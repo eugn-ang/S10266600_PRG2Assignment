@@ -18,7 +18,7 @@ namespace S10266600_PRG2Assignment
     {
         // attributes
         public double RequestFee { get; set; }
-        
+
         // ctor
         public LWTTFlight(string fn, string ori, string dest, DateTime et, string sta, double reqF) : base(fn, ori, dest, et, sta)
         {
